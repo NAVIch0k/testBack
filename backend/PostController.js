@@ -1,10 +1,10 @@
 import Post from './Post.js'
+import PostService from './PostService.js'
 
 class PostController {
   async create(req, res) {
     try {
-      const { author, title, content, picture } = req.body
-      const post = await Post.create({ author, title, content, picture })
+      const post = await PostService.create(req.body)
       return res.json(post)
     } catch (e) {
       return res.status(500).json(e)
@@ -12,7 +12,7 @@ class PostController {
   }
   async getAll(req, res) {
     try {
-      const posts = await Post.find()
+      const posts = await PostService.getAll()
       return res.json(posts)
     } catch (e) {
       return res.status(500).json(e)
@@ -20,11 +20,7 @@ class PostController {
   }
   async getById(req, res) {
     try {
-      const { id } = req.params
-      if(!id){
-        return res.status(400).json({message:'id not found'})
-      }
-      const post = await Post.findById(id)
+      const post = await PostService.getById(req.params.id)
       return res.json(post)
     } catch (e) {
       return res.status(500).json(e)
@@ -32,12 +28,16 @@ class PostController {
   }
   async update(req, res) {
     try {
+      const updatePost = await PostService.update(req.body)
+      return res.json(updatePost)
     } catch (e) {
       return res.status(500).json(e)
     }
   }
   async delete(req, res) {
     try {
+      await PostService.delete(req.params.id)
+      return res.status(200).json()
     } catch (e) {
       return res.status(500).json(e)
     }
