@@ -3,12 +3,22 @@
 }
 
 .itemTodo {
-  @apply w-48 overflow-hidden rounded-xl gap-x-2 p-2;
+  @apply w-48 rounded-xl gap-x-2 p-2 flex justify-between;
   display: flex !important;
   border: 2px solid #3d9cff;
+  label {
+    @apply overflow-hidden;
+  }
   span {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+  &__img {
+    @apply ml-1 cursor-pointer hidden w-5 h-5;
+  }
+
+  &:hover &__img {
+    display: block !important;
   }
 }

@@ -6,7 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { Toaster } from 'react-hot-toast'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 30 * 1000,
