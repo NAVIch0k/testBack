@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import router from './router.js'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 
 const PORT = 5000
 
@@ -17,6 +18,7 @@ app.use(
     }
   })
 )
+app.use(cookieParser())
 app.use('/api', router)
 
 async function startApp() {

@@ -1,4 +1,4 @@
-import Post from './Post.js'
+
 
 class PostService {
   async create(post) {
