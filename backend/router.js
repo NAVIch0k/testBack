@@ -3,10 +3,10 @@ import PostController from './PostController.js'
 
 const router = new Router()
 
-router.post('/posts', PostController.create)
-router.get('/posts', PostController.getAll)
-router.get('/posts/:id', PostController.getById)
-router.put('/posts', PostController.update)
-router.delete('/posts/:id', PostController.delete)
+router.post('/todos', PostController.create)
+router.get('/todos', PostController.getAll)
+router.get('/todos/:id', PostController.getById)
+router.put('/todos', PostController.update)
+router.delete('/todos/:id', PostController.delete)
 
 export default router

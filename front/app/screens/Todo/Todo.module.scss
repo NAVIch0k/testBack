@@ -1,0 +1,14 @@
+.cont {
+  @apply pt-10 w-full h-full flex justify-center gap-y-3;
+}
+
+.itemTodo {
+  @apply w-48 overflow-hidden rounded-xl gap-x-2 p-2;
+  display: flex !important;
+  border: 2px solid #3d9cff;
+  span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
