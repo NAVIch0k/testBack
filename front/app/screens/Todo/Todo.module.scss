@@ -22,3 +22,7 @@
     display: block !important;
   }
 }
+
+.form {
+  @apply w-full flex flex-col items-center gap-y-2;
+}

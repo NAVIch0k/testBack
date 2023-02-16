@@ -28,7 +28,7 @@ class PostController {
   }
   async update(req, res) {
     try {
-      const updatePost = await PostService.update(req.body)
+      const updatePost = await PostService.update(req.body,req.params.id)
       return res.json(updatePost)
     } catch (e) {
       return res.status(500).json(e)

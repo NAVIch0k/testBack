@@ -16,11 +16,11 @@ class PostService {
     const post = await Post.findById(id)
     return post
   }
-  async update(post) {
-    if (!post._id) {
+  async update(post,id) {
+    if (!id) {
       throw new Error('id not found')
     }
-    const updatePost = await Post.findByIdAndUpdate(post._id, post, {
+    const updatePost = await Post.findByIdAndUpdate(id, post, {
       new: true
     })
     return updatePost
