@@ -1,6 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import router from './router.js'
+import router from './Router/index.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 

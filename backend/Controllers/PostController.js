@@ -1,4 +1,4 @@
-import PostService from '../../Services/Post/PostService.js'
+import PostService from '../Services/PostService.js'
 
 class PostController {
   async create(req, res) {
