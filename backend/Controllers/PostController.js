@@ -6,7 +6,7 @@ class PostController {
       const post = await PostService.create(req.body)
       return res.json(post)
     } catch (e) {
-      return res.status(500).json(e)
+      return res.status(400).json(e)
     }
   }
   async getAll(req, res) {
@@ -14,7 +14,7 @@ class PostController {
       const posts = await PostService.getAll()
       return res.json(posts)
     } catch (e) {
-      return res.status(500).json(e)
+      return res.status(400).json(e)
     }
   }
   async getById(req, res) {
@@ -22,7 +22,7 @@ class PostController {
       const post = await PostService.getById(req.params.id)
       return res.json(post)
     } catch (e) {
-      return res.status(500).json(e)
+      return res.status(400).json(e)
     }
   }
   async update(req, res) {
@@ -30,7 +30,7 @@ class PostController {
       const updatePost = await PostService.update(req.body,req.params.id)
       return res.json(updatePost)
     } catch (e) {
-      return res.status(500).json(e)
+      return res.status(400).json(e)
     }
   }
   async delete(req, res) {
@@ -38,7 +38,7 @@ class PostController {
       await PostService.delete(req.params.id)
       return res.status(200).json()
     } catch (e) {
-      return res.status(500).json(e)
+      return res.status(400).json(e)
     }
   }
 }
