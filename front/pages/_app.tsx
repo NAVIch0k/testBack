@@ -5,6 +5,9 @@ import { QueryClientProvider, QueryClient } from 'react-query'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Toaster } from 'react-hot-toast'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { Rubik } from '@next/font/google'
+
+const rubik = Rubik({ subsets: ['latin'], weight: ['400'] })
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,13 +25,22 @@ export default function App({ Component, pageProps }: MyAppPropsType) {
   const getLayout = Component.getLayout || ((page) => page)
 
   return (
-    <ChakraProvider>
-      <QueryClientProvider client={queryClient}>
-        {getLayout(<Component {...pageProps} />)}
-        <Toaster />
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </ChakraProvider>
+    <>
+      <style jsx global>
+        {`
+          :root {
+            --rubik-font: ${rubik.style.fontFamily};
+          }
+        `}
+      </style>
+      <ChakraProvider>
+        <QueryClientProvider client={queryClient}>
+          {getLayout(<Component {...pageProps} />)}
+          <Toaster />
+          <ReactQueryDevtools />
+        </QueryClientProvider>
+      </ChakraProvider>
+    </>
   )
 }
 

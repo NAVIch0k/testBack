@@ -1,0 +1,11 @@
+.cont {
+  @apply w-full h-full flex-center;
+}
+
+.wrapper {
+  @apply max-w-md w-full max-h-96 h-full border-2 border-green-600 shadow-2xl shadow-green-600 rounded-2xl;
+}
+
+.title {
+  @apply font-Rubik font-normal text-2xl;
+}
