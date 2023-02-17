@@ -1,5 +1,5 @@
+import instance from '@/app/Api'
 import TodyType from '@/app/screens/Todo/model/Todo'
-import instance from '../index'
 
 export const TodoApi = {
   async getAllTodos() {

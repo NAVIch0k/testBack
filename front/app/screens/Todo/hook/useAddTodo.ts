@@ -1,6 +1,6 @@
-import { toast } from 'react-hot-toast'
-import { TodoApi } from './../../../Api/TodoApi/TodoApi'
-import { useMutation } from 'react-query'
+import { useMutation } from 'react-query/react';
+import { toast } from 'react-hot-toast';
+import { TodoApi } from './../TodoApi/TodoApi';
 import { queryClient } from '@/pages/_app'
 export const useAddTodo = () => {
   return useMutation(
