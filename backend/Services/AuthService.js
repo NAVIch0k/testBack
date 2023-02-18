@@ -3,10 +3,10 @@ import Role from '../Models/RoleModel.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import SECRET_KEY from '../config.js'
-const generateAccessToken = (id, role) => {
+const generateAccessToken = (role, name) => {
   const payload = {
-    id,
-    role
+    role,
+    name
   }
   return jwt.sign(payload, SECRET_KEY, { expiresIn: '24h' })
 }
@@ -35,7 +35,7 @@ class AuthService {
     if (!validPassword) {
       throw new Error('name or password is invalid')
     }
-    const token = generateAccessToken(user._id, user.role)
+    const token = generateAccessToken(user.role, user.name)
     return token
   }
 }
