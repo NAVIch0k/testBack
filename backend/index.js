@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 import router from './Router/index.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import dotenv from "dotenv";
+dotenv.config({ path: './.env' })
 
 const PORT = 5000
 
@@ -24,7 +26,7 @@ app.use('/api', router)
 async function startApp() {
   try {
     mongoose.set('strictQuery', false)
-    await mongoose.connect('mongodb://localhost/testDb')
+    await mongoose.connect(process.env.baseUrlDb)
     app.listen(PORT, () => console.log('server starting'))
   } catch (e) {
     console.log(e)
