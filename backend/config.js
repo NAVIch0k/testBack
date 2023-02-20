@@ -1,2 +1,0 @@
-const SECRET_KEY = 'SECRET_KEY'
-export default SECRET_KEY

@@ -12,7 +12,7 @@ class AuthController {
       await AuthService.create({ name, password })
       return res.json({ messaage: 'user created' })
     } catch (e) {
-      return res.status(400).json({message:e.message})
+      return res.status(400).json({ message: e.message })
     }
   }
   async login(req, res) {
@@ -22,10 +22,22 @@ class AuthController {
         return res.status(400).json(errors)
       }
       const { name, password } = req.body
-      const token = await AuthService.login({ name, password })
-      return res.json({ token })
+      const { refresh, token } = await AuthService.login({ name, password })
+      return res.json({ token, refresh })
     } catch (e) {
-      return res.status(400).json({message:e.message})
+      return res.status(400).json({ message: e.message })
+    }
+  }
+  async refresh(req, res) {
+    try {
+      const { refresh } = req.body
+      const data = await AuthService.refresh({
+        refresh,
+        ...req.user
+      })
+      return res.json(data)
+    } catch (e) {
+      return res.status(400).json({ message: e.message })
     }
   }
 }

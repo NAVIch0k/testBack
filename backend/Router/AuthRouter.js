@@ -1,6 +1,7 @@
 import Router from 'express'
 import AuthController from '../Controllers/AuthController.js'
 import { check } from 'express-validator'
+import AuthMiddleWare from '../Middleware/AuthMiddleWare.js'
 
 const AuthRouter = new Router()
 
@@ -32,5 +33,6 @@ AuthRouter.post(
   ],
   AuthController.login
 )
+AuthRouter.post('/refresh', AuthMiddleWare, AuthController.refresh)
 
 export default AuthRouter
