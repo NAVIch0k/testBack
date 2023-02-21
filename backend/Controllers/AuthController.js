@@ -40,6 +40,14 @@ class AuthController {
       return res.status(400).json({ message: e.message })
     }
   }
+  async logOut(req, res) {
+    try {
+      await AuthService.logout({ ...req.body })
+      return res.json({ message: 'success' })
+    } catch (e) {
+      return res.status(400).json({ message: e.message })
+    }
+  }
 }
 
 export default new AuthController()

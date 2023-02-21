@@ -4,10 +4,11 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import SessionModel from '../Models/SessionModel.js'
 
-const generateAccessToken = (role, name, key, time) => {
+const generateAccessToken = (role, name, userId, key, time) => {
   const payload = {
     role,
-    name
+    name,
+    userId
   }
   return jwt.sign(payload, key, { expiresIn: time })
 }
@@ -39,12 +40,14 @@ class AuthService {
     const token = generateAccessToken(
       user.role,
       user.name,
+      user._id,
       process.env.SECRET_KEY,
       '20m'
     )
     const refresh = generateAccessToken(
       user.role,
       user.name,
+      user._id,
       process.env.SECRET_KEY_REFRESH,
       '24h'
     )
@@ -61,9 +64,9 @@ class AuthService {
     }
     return { token, refresh }
   }
-  async refresh({ refresh: myRefresh, role, name }) {
+  async refresh({ refresh: myRefresh, role, name, userId }) {
     try {
-      const sessionUser = await SessionModel.findOne({ refresh: myRefresh })
+      const sessionUser = await SessionModel.findOne({ user: myRefresh })
       if (!sessionUser) {
         throw new Error('user not found')
       }
@@ -71,17 +74,28 @@ class AuthService {
       const token = generateAccessToken(
         role,
         name,
+        userId,
         process.env.SECRET_KEY,
         '20m'
       )
       const refresh = generateAccessToken(
         role,
         name,
+        userId,
         process.env.SECRET_KEY_REFRESH,
         '24h'
       )
-      await SessionModel.findOneAndUpdate({ refresh: myRefresh }, { refresh })
+      await SessionModel.findOneAndUpdate({ user: userId }, { refresh })
       return { refresh, token }
+    } catch (e) {
+      throw new Error('user not found')
+    }
+  }
+  async logout({ refresh }) {
+    try {
+      const user = await SessionModel.findOne({ refresh })
+      if (!user) throw new Error('user not found')
+      await SessionModel.deleteOne({ refresh })
     } catch (e) {
       throw new Error('user not found')
     }

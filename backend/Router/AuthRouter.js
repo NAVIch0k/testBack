@@ -34,5 +34,6 @@ AuthRouter.post(
   AuthController.login
 )
 AuthRouter.post('/refresh', AuthMiddleWare, AuthController.refresh)
+AuthRouter.post('/logout', AuthMiddleWare, AuthController.logOut)
 
 export default AuthRouter
