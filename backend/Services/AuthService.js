@@ -40,7 +40,7 @@ class AuthService {
       user.role,
       user.name,
       process.env.SECRET_KEY,
-      '5m'
+      '20m'
     )
     const refresh = generateAccessToken(
       user.role,
@@ -50,8 +50,8 @@ class AuthService {
     )
     const sessionUser = await SessionModel.findOne({ user: user._id })
     if (sessionUser) {
-      console.log(user._id);
-      await SessionModel.findOneAndUpdate({user:user._id}, {refresh})
+      console.log(user._id)
+      await SessionModel.findOneAndUpdate({ user: user._id }, { refresh })
     } else {
       const userSession = new SessionModel({
         refresh,
@@ -63,18 +63,24 @@ class AuthService {
   }
   async refresh({ refresh: myRefresh, role, name }) {
     try {
-      const sessionUser = await SessionModel.findOne({ refresh:myRefresh })
-      console.log(sessionUser)
+      const sessionUser = await SessionModel.findOne({ refresh: myRefresh })
       if (!sessionUser) {
         throw new Error('user not found')
       }
-      const token = generateAccessToken(role, name, process.env.SECRET_KEY)
+      console.log(sessionUser)
+      const token = generateAccessToken(
+        role,
+        name,
+        process.env.SECRET_KEY,
+        '20m'
+      )
       const refresh = generateAccessToken(
         role,
         name,
-        process.env.SECRET_KEY_REFRESH
+        process.env.SECRET_KEY_REFRESH,
+        '24h'
       )
-      await SessionModel.findOneAndUpdate(myRefresh, { refresh: refresh })
+      await SessionModel.findOneAndUpdate({ refresh: myRefresh }, { refresh })
       return { refresh, token }
     } catch (e) {
       throw new Error('user not found')
