@@ -46,6 +46,7 @@ const Auth = () => {
             maxLength={10}
           />
           <Input
+            type='password'
             placeholder='passwword'
             {...register('password', { required: true })}
             isInvalid={errors.password ? true : false}

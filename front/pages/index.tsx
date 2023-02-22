@@ -1,4 +1,4 @@
-import AuthProvider from '@/app/Layout/AuthProvider'
+import AuthProvider from '@/app/Provider/AuthProvider'
 import Layout from '@/app/Layout/Layout'
 import Todo from '@/app/screens/Todo/Todo'
 import React from 'react'

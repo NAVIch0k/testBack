@@ -10,6 +10,7 @@ export const useLogin = () => {
   return useMutation('login', (data: authInput) => AuthApi.login(data), {
     onSuccess(data) {
       localStorage.setItem('token', data.data.token)
+      localStorage.setItem('refresh', data.data.refresh)
       const info = jwt_decode(data.data.token)
       //@ts-ignore
       setUser({ role: info.role, userName: info.name })

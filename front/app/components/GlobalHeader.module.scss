@@ -1,0 +1,9 @@
+.cont {
+  @apply w-full flex-center relative;
+  p {
+    @apply font-Rubik text-3xl text-blue-600;
+  }
+}
+.img{
+    @apply absolute right-0 translate-x-1/2;
+}

@@ -64,28 +64,28 @@ class AuthService {
     }
     return { token, refresh }
   }
-  async refresh({ refresh: myRefresh, role, name, userId }) {
+  async refresh({ refresh: myRefresh }) {
     try {
-      const sessionUser = await SessionModel.findOne({ user: myRefresh })
+      const sessionUser = await SessionModel.findOne({ refresh: myRefresh })
       if (!sessionUser) {
         throw new Error('user not found')
       }
-      console.log(sessionUser)
+      const decodeData = jwt.verify(myRefresh, process.env.SECRET_KEY_REFRESH)
       const token = generateAccessToken(
-        role,
-        name,
-        userId,
+        decodeData.role,
+        decodeData.name,
+        decodeData.userId,
         process.env.SECRET_KEY,
         '20m'
       )
       const refresh = generateAccessToken(
-        role,
-        name,
-        userId,
+        decodeData.role,
+        decodeData.name,
+        decodeData.userId,
         process.env.SECRET_KEY_REFRESH,
         '24h'
       )
-      await SessionModel.findOneAndUpdate({ user: userId }, { refresh })
+      await SessionModel.findOneAndUpdate({ refresh: myRefresh }, { refresh })
       return { refresh, token }
     } catch (e) {
       throw new Error('user not found')

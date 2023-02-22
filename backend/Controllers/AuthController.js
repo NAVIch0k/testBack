@@ -32,8 +32,7 @@ class AuthController {
     try {
       const { refresh } = req.body
       const data = await AuthService.refresh({
-        refresh,
-        ...req.user
+        refresh
       })
       return res.json(data)
     } catch (e) {
