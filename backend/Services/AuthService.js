@@ -42,7 +42,7 @@ class AuthService {
       user.name,
       user._id,
       process.env.SECRET_KEY,
-      '20m'
+      '5s'
     )
     const refresh = generateAccessToken(
       user.role,
@@ -53,7 +53,6 @@ class AuthService {
     )
     const sessionUser = await SessionModel.findOne({ user: user._id })
     if (sessionUser) {
-      console.log(user._id)
       await SessionModel.findOneAndUpdate({ user: user._id }, { refresh })
     } else {
       const userSession = new SessionModel({
