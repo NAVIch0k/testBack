@@ -42,7 +42,7 @@ class AuthService {
       user.name,
       user._id,
       process.env.SECRET_KEY,
-      '5s'
+      '20m'
     )
     const refresh = generateAccessToken(
       user.role,

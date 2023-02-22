@@ -22,7 +22,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <div className={s.cont}>
-      <GlobalHeader />
+      {router.asPath !== '/auth' ? <GlobalHeader /> : <></>}
       {children}
     </div>
   )
